@@ -26,7 +26,7 @@ class Page {
 
 		$this->tpl = new Tpl;
 
-		$this->setData($this->$options["data"]);
+		$this->setData($this->options["data"]);
 
 		$this->tpl->draw("header");
 
