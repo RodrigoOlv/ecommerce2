@@ -85,6 +85,15 @@ $app->get("/admin/users/:iduser/delete", function($iduser){ //Rota deletar usuá
 
 	User::verifyLogin();
 
+	$user = new User();
+
+	$user->get((int)$iduser);
+
+	$user->delete();
+
+	header("Location: /admin/users");
+	exit;
+
 });
 
 $app->get("/admin/users/:iduser", function($iduser){ //Rota User-Update
@@ -123,6 +132,19 @@ $app->post("/admin/users/create", function(){ //Rota salvar create
 $app->post("/admin/users/:iduser", function($iduser){ //Rota salvar update
 
 	User::verifyLogin();
+
+	$user = new User();
+
+	$_POST["inadmin"] = (isset($_POST["inadmin"])) ? 1 : 0;
+
+	$user->get((int)$iduser);
+
+	$user->setData($_POST);
+
+	$user->update();
+
+	header("Location: /admin/users");
+	exit;
 
 });
 
