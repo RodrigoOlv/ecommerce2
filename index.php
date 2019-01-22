@@ -12,7 +12,7 @@ $app = new \Slim\Slim();
 
 $app->config('debug', true);
 
-$app->get('/', function() {//Rota do Index
+$app->get('/', function() {//Renderização do template index
     
 	$page = new Page();
 
@@ -30,7 +30,7 @@ $app->get('/admin', function() {//Rota do Admin
 
 });
 
-$app->get('/admin/login', function() {//Rota Tela Login
+$app->get('/admin/login', function() {//Renderização do template login
 
 	$page = new PageAdmin([
 		"header"=>false,
@@ -145,6 +145,36 @@ $app->post("/admin/users/:iduser", function($iduser){ //Rota salvar update
 
 	header("Location: /admin/users");
 	exit;
+
+});
+
+$app->get("/admin/forgot", function() { //Recuperação de Senha
+
+	$page = new PageAdmin([
+		"header"=>false,
+		"footer"=>false
+	]);
+
+	$page->setTpl("forgot");
+
+});
+
+$app->post("/admin/forgot", function() { //Rota para Recuperar Senha
+
+	$user = User::getForgot($_POST["email"]);
+
+	header("Location: /admin/forgot/sent");
+	exit;
+});
+
+$app->get("/admin/forgot/sent", function(){ //Renderização do template forgot-sent
+
+	$page = new PageAdmin([
+		"header"=>false,
+		"footer"=>false
+	]);
+
+	$page->setTpl("forgot-sent");
 
 });
 
