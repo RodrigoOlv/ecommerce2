@@ -20,7 +20,7 @@ $app->get('/', function() {//Renderização do template index
 
 });
 
-$app->get('/admin', function() {//Rota do Admin
+$app->get('/admin', function() {//Renderização do template do index do admin
 
 	User::verifyLogin();
     
@@ -71,7 +71,7 @@ $app->get("/admin/users", function(){ //Rota User
 
 });
 
-$app->get("/admin/users/create", function(){ //Rota User-Create
+$app->get("/admin/users/create", function(){ //Renderização do template users-create
 
 	User::verifyLogin();
 
@@ -148,7 +148,7 @@ $app->post("/admin/users/:iduser", function($iduser){ //Rota salvar update
 
 });
 
-$app->get("/admin/forgot", function() { //Recuperação de Senha
+$app->get("/admin/forgot", function() { //Renderização do template forgot
 
 	$page = new PageAdmin([
 		"header"=>false,
