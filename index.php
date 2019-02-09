@@ -178,4 +178,20 @@ $app->get("/admin/forgot/sent", function(){ //Renderização do template forgot-
 
 });
 
+$app->get("/admin/forgot/reset", function(){
+ 
+    $user = User::validForgotDecrypt($_GET['code']);
+ 
+    $page = new PageAdmin(array(
+        "header"=>false,
+        "footer"=>false
+    ));
+ 
+    $page->setTpl("forgot-reset", array(
+        "name"=>$user['desperson'],
+	"code"=>$_GET['code']
+    ));
+ 
+});
+
 $app->run();
